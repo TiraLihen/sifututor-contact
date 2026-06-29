@@ -1,0 +1,587 @@
+/* REKA BENTUK BRANDED WHATSAPP CONTACT HUB (SIFUTUTOR) */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-primary: #030712;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #0b2c74 0%, #020617 100%); /* Sifututor Deep Royal Blue */
+  --card-bg: rgba(11, 44, 116, 0.15);
+  --card-border: rgba(255, 255, 255, 0.05);
+  --card-hover-border: rgba(0, 184, 230, 0.3); /* Premium soft blue/teal glow default */
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --brand-orange: #f25822;     /* Sifututor Orange */
+  --brand-teal: #00b8e6;       /* Sifututor Teal/Blue */
+  --brand-purple: #a855f7;     /* Brand Accent Purple for Tutor */
+  --brand-glow: rgba(242, 88, 34, 0.15);
+  
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-primary);
+  background-image: var(--bg-gradient);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Subtle background ambient animation */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 30%, rgba(11, 44, 116, 0.35) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+  animation: ambientGlow 10s ease-in-out infinite alternate;
+}
+
+@keyframes ambientGlow {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.8; }
+  50% { transform: scale(1.05) translate(2%, 2%); opacity: 1; }
+  100% { transform: scale(1) translate(0, 0); opacity: 0.8; }
+}
+
+/* Container utama berkonsep mobile-first (maksimum lebar 480px) */
+.container {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  position: relative;
+}
+
+/* Header Syarikat */
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+/* Logo fades in and slides down slightly */
+.logo-container {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  background: transparent;
+  overflow: hidden;
+  opacity: 0;
+  -webkit-animation: logoEntry 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: logoEntry 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Separate animation container to run floating infinitely while entry runs once */
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  -webkit-animation: logoFloat 4s ease-in-out infinite;
+  animation: logoFloat 4s ease-in-out infinite;
+}
+
+/* Heading fades in */
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  -webkit-animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+/* Subtitle fades in */
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: 0 15px;
+  opacity: 0;
+  -webkit-animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+/* Senarai Kad Butang */
+.card-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Kad Jabatan */
+.card {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  text-decoration: none;
+  color: inherit;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  
+  /* Clean fade-in without vertical translation to prevent vertical scrollbar trigger */
+  opacity: 0;
+  -webkit-animation: cardEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: cardEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  
+  /* Hover transition rule */
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover Interaction overrides */
+.card:hover {
+  transform: translateY(-4px); /* Lift slightly */
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 184, 230, 0.08); /* Increase shadow subtly */
+  background: rgba(11, 44, 116, 0.25);
+}
+
+/* Click Interaction (Scale to 0.98 briefly) */
+.card:active {
+  transform: translateY(-2px) scale(0.98);
+  transition: transform 80ms ease;
+}
+
+/* Spotlight mouse tracking element */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(800px circle at var(--x, 0px) var(--y, 0px), rgba(255, 255, 255, 0.03), transparent 40%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* Kandungan Kad */
+.card-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  margin-right: 18px;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+  transition: background-color 250ms ease, border-color 250ms ease;
+}
+
+.card-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), filter 250ms ease;
+}
+
+/* Apply subtle glow to icon on hover */
+.card:hover .card-icon {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+.card-info {
+  flex-grow: 1;
+  z-index: 2;
+  text-align: left;
+}
+
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  transition: color 250ms ease;
+}
+
+.card-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Arrow indicator (moves 6px to the right on hover) */
+.card-arrow {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-muted);
+  margin-left: 12px;
+  flex-shrink: 0;
+  z-index: 2;
+  transition: stroke 250ms ease, transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .card-arrow {
+  transform: translateX(6px); /* Move chevron arrow 6px to the right */
+}
+
+/* Penyesuaian Warna Mengikut Jabatan */
+
+/* 1. Finance (Orange Theme) */
+.card-finance:hover {
+  border-color: rgba(242, 88, 34, 0.4); /* Show soft glow */
+}
+.card-finance .card-icon-container {
+  background: rgba(242, 88, 34, 0.05);
+  border-color: rgba(242, 88, 34, 0.1);
+}
+.card-finance:hover .card-icon-container {
+  background: rgba(242, 88, 34, 0.12);
+  border-color: rgba(242, 88, 34, 0.25);
+}
+.card-finance:hover .card-title {
+  color: var(--brand-orange);
+}
+.card-finance:hover .card-arrow {
+  stroke: var(--brand-orange);
+}
+
+/* 2. Helpdesk (Teal Theme) */
+.card-helpdesk:hover {
+  border-color: rgba(0, 184, 230, 0.4);
+}
+.card-helpdesk .card-icon-container {
+  background: rgba(0, 184, 230, 0.05);
+  border-color: rgba(0, 184, 230, 0.1);
+}
+.card-helpdesk:hover .card-icon-container {
+  background: rgba(0, 184, 230, 0.12);
+  border-color: rgba(0, 184, 230, 0.25);
+}
+.card-helpdesk:hover .card-title {
+  color: var(--brand-teal);
+}
+.card-helpdesk:hover .card-arrow {
+  stroke: var(--brand-teal);
+}
+
+/* 3. Tutor Experience (Purple Theme) */
+.card-tutor:hover {
+  border-color: rgba(168, 85, 247, 0.4);
+}
+.card-tutor .card-icon-container {
+  background: rgba(168, 85, 247, 0.05);
+  border-color: rgba(168, 85, 247, 0.1);
+}
+.card-tutor:hover .card-icon-container {
+  background: rgba(168, 85, 247, 0.12);
+  border-color: rgba(168, 85, 247, 0.25);
+}
+.card-tutor:hover .card-title {
+  color: var(--brand-purple);
+}
+.card-tutor:hover .card-arrow {
+  stroke: var(--brand-purple);
+}
+
+/* Loading Spinner Styling */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-left: 12px;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Click ripple effect element */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(0);
+  animation: rippleEffect 0.5s ease-out;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes rippleEffect {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Footer Halaman */
+.footer {
+  margin-top: 48px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ANIMASIS */
+@-webkit-keyframes fadeIn {
+  0% { opacity: 0; -webkit-transform: translateY(10px); }
+  5% { opacity: 0; -webkit-transform: translateY(10px); }
+  100% { opacity: 1; -webkit-transform: translateY(0); }
+}
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  5% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@-webkit-keyframes logoEntry {
+  0% { opacity: 0; -webkit-transform: translateY(-16px); }
+  5% { opacity: 0; -webkit-transform: translateY(-16px); }
+  100% { opacity: 1; -webkit-transform: translateY(0); }
+}
+@keyframes logoEntry {
+  0% { opacity: 0; transform: translateY(-16px); }
+  5% { opacity: 0; transform: translateY(-16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@-webkit-keyframes cardEntry {
+  0% { opacity: 0; }
+  5% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes cardEntry {
+  0% { opacity: 0; }
+  5% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Smooth levitating floating animation */
+@keyframes logoFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+  .logo-image {
+    animation: none;
+  }
+}
+
+/* Responsif untuk paparan skrin sangat kecil */
+@media (max-width: 380px) {
+  body {
+    padding: 10px;
+  }
+  .card {
+    padding: 16px;
+  }
+  .card-icon-container {
+    margin-right: 12px;
+  }
+}
+
+/* Language Switcher Button Styles */
+.lang-switcher {
+  display: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 30px;
+  padding: 3px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 100;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lang-btn:hover {
+  color: var(--text-primary);
+}
+
+.lang-btn.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================
+   PREMIUM CONFIRMATION MODAL STYLES
+   ========================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(2, 6, 23, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-card {
+  width: 90%;
+  max-width: 400px;
+  background: rgba(11, 44, 116, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 28px;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+}
+
+.modal-overlay.active .modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.modal-header h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+}
+
+.modal-body p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  white-space: pre-line;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.btn-primary {
+  border: none;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary.theme-finance {
+  background: var(--brand-orange);
+  box-shadow: 0 4px 15px rgba(242, 88, 34, 0.25);
+}
+
+.btn-primary.theme-finance:hover {
+  background: #f46f41;
+  box-shadow: 0 6px 20px rgba(242, 88, 34, 0.35);
+}
+
+.btn-primary.theme-tutor {
+  background: var(--brand-purple);
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.25);
+}
+
+.btn-primary.theme-tutor:hover {
+  background: #b56ff9;
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.35);
+}
+

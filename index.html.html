@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sifututor Contact Hub</title>
+  
+  <!-- Open Graph Meta Tags for WhatsApp & Social Media Preview -->
+  <meta property="og:title" content="Sifututor Contact Hub">
+  <meta property="og:description" content="Hub Sokongan & Bantuan Sifututor. Pilih jabatan untuk berhubung dengan kami melalui WhatsApp.">
+  <meta property="og:image" content="https://tiralihen.github.io/sifututor-contact/logo.png">
+  <meta property="og:url" content="https://tiralihen.github.io/sifututor-contact/">
+  <meta property="og:type" content="website">
+  <style>
+    /* REKA BENTUK BRANDED WHATSAPP CONTACT HUB (SIFUTUTOR) */
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --bg-primary: #030712;
+      --bg-gradient: radial-gradient(circle at 50% 0%, #0b2c74 0%, #020617 100%); /* Sifututor Deep Royal Blue */
+      --card-bg: rgba(11, 44, 116, 0.15);
+      --card-border: rgba(255, 255, 255, 0.05);
+      --card-hover-border: rgba(0, 184, 230, 0.3); /* Premium soft blue/teal glow default */
+      
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --brand-orange: #f25822;     /* Sifututor Orange */
+      --brand-teal: #00b8e6;       /* Sifututor Teal/Blue */
+      --brand-purple: #a855f7;     /* Brand Accent Purple for Tutor */
+      --brand-glow: rgba(242, 88, 34, 0.15);
+      
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--bg-primary);
+      background-image: var(--bg-gradient);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Subtle background ambient animation */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 30%, rgba(11, 44, 116, 0.35) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: -1;
+      animation: ambientGlow 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambientGlow {
+      0% { transform: scale(1) translate(0, 0); opacity: 0.8; }
+      50% { transform: scale(1.05) translate(2%, 2%); opacity: 1; }
+      100% { transform: scale(1) translate(0, 0); opacity: 0.8; }
+    }
+
+    /* Container utama berkonsep mobile-first (maksimum lebar 480px) */
+    .container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    /* Header Syarikat */
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+      width: 100%;
+    }
+
+    .logo-container {
+      margin-top: 40px;
+      margin-bottom: 16px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px; /* Resized to 200px */
+      height: 200px; /* Resized to 200px */
+      background: transparent; /* Set to transparent to blend transparent logos seamlessly */
+      overflow: hidden;
+      opacity: 0;
+      -webkit-animation: logoEntry 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation: logoEntry 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .logo-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      -webkit-animation: logoFloat 4s ease-in-out infinite;
+      animation: logoFloat 4s ease-in-out infinite;
+    }
+
+    .title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0;
+      -webkit-animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+      -webkit-animation-delay: 0.2s;
+      animation-delay: 0.2s;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      padding: 0 15px;
+      opacity: 0;
+      -webkit-animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+      -webkit-animation-delay: 0.4s;
+      animation-delay: 0.4s;
+    }
+
+    /* Senarai Kad Butang */
+    .card-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Kad Jabatan */
+    .card {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      text-decoration: none;
+      color: inherit;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      
+      /* Clean fade-in without vertical translation to prevent vertical scrollbar trigger */
+      opacity: 0;
+      -webkit-animation: cardEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation: cardEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      
+      /* Hover transition rule */
+      transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Hover Interaction overrides */
+    .card:hover {
+      transform: translateY(-4px); /* Lift slightly */
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 184, 230, 0.08); /* Increase shadow subtly */
+      background: rgba(11, 44, 116, 0.25);
+    }
+
+    /* Click Interaction (Scale to 0.98 briefly) */
+    .card:active {
+      transform: translateY(-2px) scale(0.98);
+      transition: transform 80ms ease;
+    }
+
+    /* Spotlight mouse tracking element */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(800px circle at var(--x, 0px) var(--y, 0px), rgba(255, 255, 255, 0.03), transparent 40%);
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    /* Kandungan Kad */
+    .card-icon-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      margin-right: 18px;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      border: 1px solid transparent;
+    }
+
+    .card-icon {
+      width: 24px;
+      height: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.1);
+    }
+
+    .card-info {
+      flex-grow: 1;
+      z-index: 2;
+      text-align: left;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-size: 0.75rem; /* Smaller font size as requested */
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* Penyesuaian Warna Mengikut Jabatan */
+
+    /* 1. Finance (Orange Theme) */
+    .card-finance .card-icon-container {
+      background: rgba(242, 88, 34, 0.06);
+      border-color: rgba(242, 88, 34, 0.1);
+    }
+    .card-finance:hover .card-icon-container {
+      background: rgba(242, 88, 34, 0.15);
+      border-color: rgba(242, 88, 34, 0.3);
+    }
+    .card-finance .card-title {
+      transition: color 0.3s ease;
+    }
+    .card-finance:hover .card-title {
+      color: var(--brand-orange);
+    }
+
+    /* 2. Helpdesk (Teal Theme) */
+    .card-helpdesk .card-icon-container {
+      background: rgba(0, 184, 230, 0.06);
+      border-color: rgba(0, 184, 230, 0.1);
+    }
+    .card-helpdesk:hover .card-icon-container {
+      background: rgba(0, 184, 230, 0.15);
+      border-color: rgba(0, 184, 230, 0.3);
+    }
+    .card-helpdesk .card-title {
+      transition: color 0.3s ease;
+    }
+    .card-helpdesk:hover .card-title {
+      color: var(--brand-teal);
+    }
+
+    /* 3. Tutor Experience (Purple Theme) */
+    .card-tutor .card-icon-container {
+      background: rgba(168, 85, 247, 0.06);
+      border-color: rgba(168, 85, 247, 0.1);
+    }
+    .card-tutor:hover .card-icon-container {
+      background: rgba(168, 85, 247, 0.15);
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+    .card-tutor .card-title {
+      transition: color 0.3s ease;
+    }
+    .card-tutor:hover .card-title {
+      color: var(--brand-purple);
+    }
+
+    /* Arrow indicator di sebelah kanan kad */
+    .card-arrow {
+      width: 20px;
+      height: 20px;
+      stroke: var(--text-muted);
+      transition: all 0.3s ease;
+      margin-left: 12px;
+      flex-shrink: 0;
+      z-index: 2;
+    }
+
+    .card-finance:hover .card-arrow {
+      stroke: var(--brand-orange);
+      transform: translateX(6px);
+    }
+    .card-helpdesk:hover .card-arrow {
+      stroke: var(--brand-teal);
+      transform: translateX(6px);
+    }
+    .card-tutor:hover .card-arrow {
+      stroke: var(--brand-purple);
+      transform: translateX(6px);
+    }
+
+    /* Loading Spinner Styling */
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      margin-left: 12px;
+      flex-shrink: 0;
+      z-index: 2;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Click ripple effect element */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      transform: scale(0);
+      animation: rippleEffect 0.5s ease-out;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    @keyframes rippleEffect {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* Footer Halaman */
+    .footer {
+      margin-top: 48px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ANIMASI */
+    @-webkit-keyframes fadeIn {
+      0% { opacity: 0; -webkit-transform: translateY(10px); }
+      5% { opacity: 0; -webkit-transform: translateY(10px); }
+      100% { opacity: 1; -webkit-transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      5% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @-webkit-keyframes logoEntry {
+      0% { opacity: 0; -webkit-transform: translateY(-16px); }
+      5% { opacity: 0; -webkit-transform: translateY(-16px); }
+      100% { opacity: 1; -webkit-transform: translateY(0); }
+    }
+    @keyframes logoEntry {
+      0% { opacity: 0; transform: translateY(-16px); }
+      5% { opacity: 0; transform: translateY(-16px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @-webkit-keyframes cardEntry {
+      0% { opacity: 0; }
+      5% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes cardEntry {
+      0% { opacity: 0; }
+      5% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Smooth levitating floating animation */
+    @-webkit-keyframes logoFloat {
+      0% { -webkit-transform: translateY(0); }
+      50% { -webkit-transform: translateY(-8px); }
+      100% { -webkit-transform: translateY(0); }
+    }
+    @keyframes logoFloat {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Respect prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-delay: -1ms !important;
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        background-attachment: initial !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
+      }
+      .logo-image {
+        animation: none;
+      }
+    }
+
+    /* Responsif untuk paparan skrin sangat kecil */
+    @media (max-width: 380px) {
+      body {
+        padding: 10px;
+      }
+      .card {
+        padding: 16px;
+      }
+      .card-icon-container {
+        margin-right: 12px;
+      }
+      .title {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Language Switcher Button Styles */
+    .lang-switcher {
+      display: none;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 30px;
+      padding: 3px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .lang-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .lang-btn.active {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--text-primary);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ==========================================
+       PREMIUM CONFIRMATION MODAL STYLES
+       ========================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 6, 23, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-card {
+      width: 90%;
+      max-width: 400px;
+      background: rgba(11, 44, 116, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 28px;
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: center;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--text-primary);
+      letter-spacing: -0.3px;
+    }
+
+    .modal-body p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      white-space: pre-line;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .modal-btn {
+      flex: 1;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-secondary);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+    }
+
+    .btn-primary {
+      border: none;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary.theme-finance {
+      background: var(--brand-orange);
+      box-shadow: 0 4px 15px rgba(242, 88, 34, 0.25);
+    }
+
+    .btn-primary.theme-finance:hover {
+      background: #f46f41;
+      box-shadow: 0 6px 20px rgba(242, 88, 34, 0.35);
+    }
+
+    .btn-primary.theme-tutor {
+      background: var(--brand-purple);
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.25);
+    }
+
+    .btn-primary.theme-tutor:hover {
+      background: #b56ff9;
+      box-shadow: 0 6px 20px rgba(168, 85, 247, 0.35);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" style="position: relative;">
+    <!-- Language Switcher -->
+    <div class="lang-switcher">
+      <button id="btn-en" class="lang-btn active">EN</button>
+      <button id="btn-bm" class="lang-btn">BM</button>
+    </div>
+
+    <!-- Syarikat Header -->
+    <header class="header">
+      <div class="logo-container">
+        <!-- Brand Logo Image -->
+        <img src="data:image/png;base64,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" class="logo-image" alt="Sifututor Logo">
+      </div>
+      <h1 id="page-title" class="title">Support Hub</h1>
+      <p id="page-subtitle" class="subtitle">Choose the department based on your enquiry.</p>
+    </header>
+
+    <!-- Card List -->
+    <main id="card-list" class="card-list">
+      <!-- 1. Finance (Orange Theme) -->
+      <a class="card card-finance" style="-webkit-animation-delay: 0.55s; animation-delay: 0.55s;" href="https://api.whatsapp.com/send?phone=60103170575&text=Selamat%20datang%20ke%20*Helpdesk%20Finance.*%20%F0%9F%98%8A%0A%0AUntuk%20memudahkan%20kami%20membantu%2C%20mohon%20kongsikan%3A%0A%0A-%20*Nama%20Penuh%3A*%0A-%20*Ringkasan%20isu%20atau%20pertanyaan%3A*%0A%0AJika%20berkaitan%2C%20sila%20sertakan%20*screenshot*%20bagi%20memudahkan%20proses%20semakan.%0ATerima%20kasih%20atas%20kerjasama%20tuan%2Fpuan.%20%F0%9F%8C%B9" target="_blank">
+        <div class="card-icon-container">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#f25822" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="5" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="2" y1="10" x2="22" y2="10"></line>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h2 class="card-title">Finance</h2>
+          <p class="card-desc">For Parents only. Get help with tuition fee payments, invoices, receipts and other billing or account enquiries.</p>
+        </div>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+
+      <!-- 2. Helpdesk (Teal Theme) -->
+      <a class="card card-helpdesk" style="-webkit-animation-delay: 0.70s; animation-delay: 0.70s;" href="https://api.whatsapp.com/send?phone=60103170575&text=Selamat%20datang%20ke%20*Helpdesk%20Customer.*%20%F0%9F%98%8A%0A%0AUntuk%20memudahkan%20kami%20membantu%2C%20mohon%20kongsikan%3A%0A%0A-%20*Nama%20Penuh%3A*%0A-%20*Ringkasan%20isu%20atau%20pertanyaan%3A*%0A%0AJika%20berkaitan%2C%20sila%20sertakan%20*screenshot*%20bagi%20memudahkan%20proses%20semakan.%0ATerima%20kasih%20atas%20kerjasama%20tuan%2Fpuan.%20%F0%9F%8C%B9" target="_blank">
+        <div class="card-icon-container">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#00b8e6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h2 class="card-title">Helpdesk & App Support</h2>
+          <p class="card-desc">For Parents only. Get help with app issues, login problems, tutor-related concerns, complaints or any general enquiries.</p>
+        </div>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+
+      <!-- 3. Tutor Experience (Purple Theme) -->
+      <a class="card card-tutor" style="-webkit-animation-delay: 0.85s; animation-delay: 0.85s;" href="https://api.whatsapp.com/send?phone=60103170575&text=Selamat%20datang%20ke%20*Helpdesk%20Tutor.*%20%F0%9F%98%8A%0A%0AUntuk%20memudahkan%20kami%20membantu%2C%20mohon%20kongsikan%3A%0A%0A-%20*Nama%20Penuh%3A*%0A-%20*Ringkasan%20isu%20atau%20pertanyaan%3A*%0A%0AJika%20berkaitan%2C%20sila%20sertakan%20*screenshot*%20bagi%20memudahkan%20proses%20semakan.%0ATerima%20kasih%20atas%20kerjasama%20tuan%2Fpuan.%20%F0%9F%8C%B9" target="_blank">
+        <div class="card-icon-container">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h2 class="card-title">Tutor Experience</h2>
+          <p class="card-desc">For Tutors only. Get help with tutor registration, commissions, class schedules, account updates and tutor welfare.</p>
+        </div>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Powered by Sifututor</p>
+    </footer>
+  </div>
+
+  <!-- Premium Confirmation Modal -->
+  <div id="confirm-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-title">Confirmation</h3>
+      </div>
+      <div class="modal-body">
+        <p id="modal-message">Message text...</p>
+      </div>
+      <div class="modal-actions">
+        <button id="modal-btn-cancel" class="modal-btn btn-secondary">Go Back</button>
+        <button id="modal-btn-proceed" class="modal-btn btn-primary">Proceed</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let activeLanguage = "en";
+
+    const TRANSLATIONS = {
+      bm: {
+        title: "Hub Sokongan & Bantuan",
+        subtitle: "Pilih jabatan berdasarkan pertanyaan anda.",
+        financeTitle: "Finance",
+        financeDesc: "Untuk Ibu Bapa sahaja. Bantuan berkaitan pembayaran yuran, invois, resit serta pertanyaan akaun.",
+        helpdeskTitle: "Helpdesk & App Support",
+        helpdeskDesc: "Untuk Ibu Bapa sahaja. Bantuan berkaitan aplikasi, masalah log masuk, aduan atau isu berkaitan tutor serta pertanyaan umum.",
+        tutorTitle: "Tutor Experience",
+        tutorDesc: "Untuk Tutor sahaja. Bantuan berkaitan pendaftaran tutor, komisyen, jadual kelas, kemas kini akaun serta kebajikan tutor.",
+        financeUrl: "https://api.whatsapp.com/send?phone=60103170575&text=Selamat%20datang%20ke%20*Helpdesk%20Finance.*%20%F0%9F%98%8A%0A%0AUntuk%20memudahkan%20kami%20membantu%2C%20mohon%20kongsikan%3A%0A%0A-%20*Nama%20Penuh%3A*%0A-%20*Ringkasan%20isu%20atau%20pertanyaan%3A*%0A%0AJika%20berkaitan%2C%20sila%20sertakan%20*screenshot*%20bagi%20memudahkan%20proses%20semakan.%0ATerima%20kasih%20atas%20kerjasama%20tuan%2Fpuan.%20%F0%9F%8C%B9",
+        helpdeskUrl: "https://api.whatsapp.com/send?phone=60103170575&text=Selamat%20datang%20ke%20*Helpdesk%20Customer.*%20%F0%9F%98%8A%0A%0AUntuk%20memudahkan%20kami%20membantu%2C%20mohon%20kongsikan%3A%0A%0A-%20*Nama%20Penuh%3A*%0A-%20*Ringkasan%20isu%20atau%20pertanyaan%3A*%0A%0AJika%20berkaitan%2C%20sila%20sertakan%20*screenshot*%20bagi%20memudahkan%20proses%20semakan.%0ATerima%20kasih%20atas%20kerjasama%20tuan%2Fpuan.%20%F0%9F%8C%B9",
+        tutorUrl: "https://api.whatsapp.com/send?phone=60103170575&text=Selamat%20datang%20ke%20*Helpdesk%20Tutor.*%20%F0%9F%98%8A%0A%0AUntuk%20memudahkan%20kami%20membantu%2C%20mohon%20kongsikan%3A%0A%0A-%20*Nama%20Penuh%3A*%0A-%20*Ringkasan%20isu%20atau%20pertanyaan%3A*%0A%0AJika%20berkaitan%2C%20sila%20sertakan%20*screenshot*%20bagi%20memudahkan%20proses%20semakan.%0ATerima%20kasih%20atas%20kerjasama%20tuan%2Fpuan.%20%F0%9F%8C%B9",
+        confirmFinanceTitle: "Pengesahan Jabatan Kewangan",
+        confirmFinanceMsg: "Untuk Ibu Bapa sahaja. Bantuan berkaitan pembayaran yuran, invois, resit serta pertanyaan akaun.\n\nJika anda seorang tutor yang mempunyai pertanyaan tentang komisyen atau jadual kelas, sila pilih jabatan Tutor Experience.",
+        confirmTutorTitle: "Pengesahan Tutor Experience",
+        confirmTutorMsg: "Untuk Tutor sahaja. Bantuan berkaitan pendaftaran tutor, komisyen, jadual kelas, kemas kini akaun serta kebajikan tutor.\n\nJika anda seorang ibu bapa yang mempunyai aduan atau isu berkaitan tutor anda, sila pilih jabatan Helpdesk & App Support.",
+        btnCancel: "Kembali",
+        btnProceed: "Teruskan"
+      },
+      en: {
+        title: "Support & Help Center",
+        subtitle: "Choose the department based on your enquiry.",
+        financeTitle: "Finance",
+        financeDesc: "For Parents only. Get help with tuition fee payments, invoices, receipts and other billing or account enquiries.",
+        helpdeskTitle: "Helpdesk & App Support",
+        helpdeskDesc: "For Parents only. Get help with app issues, login problems, tutor-related concerns, complaints or any general enquiries.",
+        tutorTitle: "Tutor Experience",
+        tutorDesc: "For Tutors only. Get help with tutor registration, commissions, class schedules, account updates and tutor welfare.",
+        financeUrl: "https://api.whatsapp.com/send?phone=60103170575&text=Welcome%20to%20*Helpdesk%20Finance.*%20%F0%9F%98%8A%0A%0ATo%20help%20us%20assist%20you%20better%2C%20please%20share%3A%0A%0A-%20*Full%20Name%3A*%0A-%20*Summary%20of%20issue%20or%20inquiry%3A*%0A%0AIf%20applicable%2C%20please%20attach%20a%20*screenshot*%20to%20facilitate%20the%20review%20process.%0AThank%20you%20for%20your%20cooperation.%20%F0%9F%8C%B9",
+        helpdeskUrl: "https://api.whatsapp.com/send?phone=60103170575&text=Welcome%20to%20*Helpdesk%20Customer.*%20%F0%9F%98%8A%0A%0ATo%20help%20us%20assist%20you%20better%2C%20please%20share%3A%0A%0A-%20*Full%20Name%3A*%0A-%20*Summary%20of%20issue%20or%20inquiry%3A*%0A%0AIf%20applicable%2C%20please%20attach%20a%20*screenshot*%20to%20facilitate%20the%20review%20process.%0AThank%20you%20for%20your%20cooperation.%20%F0%9F%8C%B9",
+        tutorUrl: "https://api.whatsapp.com/send?phone=60103170575&text=Welcome%20to%20*Helpdesk%20Tutor.*%20%F0%9F%98%8A%0A%0ATo%20help%20us%20assist%20you%20better%2C%20please%20share%3A%0A%0A-%20*Full%20Name%3A*%0A-%20*Summary%20of%20issue%20or%20inquiry%3A*%0A%0AIf%20applicable%2C%20please%20attach%20a%20*screenshot*%20to%20facilitate%20the%20review%20process.%0AThank%20you%20for%20your%20cooperation.%20%F0%9F%8C%B9",
+        confirmFinanceTitle: "Finance Department Confirmation",
+        confirmFinanceMsg: "This department is for Parents/Clients only.\n\nIf you're a tutor with enquiries about commissions or schedules, please select Tutor Experience instead.",
+        confirmTutorTitle: "Tutor Experience Confirmation",
+        confirmTutorMsg: "This department is for Tutors only.\n\nIf you're a parent with enquiries or concerns about your tutor, please select Helpdesk & App Support instead.",
+        btnCancel: "Go Back",
+        btnProceed: "Proceed"
+      }
+    };
+
+    function setLanguage(lang) {
+      const t = TRANSLATIONS[lang];
+      if (!t) return;
+      activeLanguage = lang;
+      
+      // Update header
+      document.getElementById("page-title").textContent = t.title;
+      document.getElementById("page-subtitle").textContent = t.subtitle;
+      
+      // Update cards
+      const financeCard = document.querySelector(".card-finance");
+      financeCard.querySelector(".card-title").textContent = t.financeTitle;
+      financeCard.querySelector(".card-desc").textContent = t.financeDesc;
+      financeCard.href = t.financeUrl;
+      
+      const helpdeskCard = document.querySelector(".card-helpdesk");
+      helpdeskCard.querySelector(".card-title").textContent = t.helpdeskTitle;
+      helpdeskCard.querySelector(".card-desc").textContent = t.helpdeskDesc;
+      helpdeskCard.href = t.helpdeskUrl;
+      
+      const tutorCard = document.querySelector(".card-tutor");
+      tutorCard.querySelector(".card-title").textContent = t.tutorTitle;
+      tutorCard.querySelector(".card-desc").textContent = t.tutorDesc;
+      tutorCard.href = t.tutorUrl;
+      
+      // Update buttons
+      document.getElementById("btn-bm").classList.toggle("active", lang === "bm");
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
+      
+      try {
+        localStorage.setItem("sifututor_lang", lang);
+      } catch(e) {}
+    }
+
+    let pendingRedirectUrl = "";
+    let pendingCardElement = null;
+
+    function showConfirmation(type, targetUrl, card) {
+      pendingRedirectUrl = targetUrl;
+      pendingCardElement = card;
+
+      const t = TRANSLATIONS[activeLanguage];
+      const modal = document.getElementById("confirm-modal");
+      const titleEl = document.getElementById("modal-title");
+      const msgEl = document.getElementById("modal-message");
+      const cancelBtn = document.getElementById("modal-btn-cancel");
+      const proceedBtn = document.getElementById("modal-btn-proceed");
+
+      if (type === "finance") {
+        titleEl.textContent = t.confirmFinanceTitle;
+        msgEl.textContent = t.confirmFinanceMsg;
+        proceedBtn.className = "modal-btn btn-primary theme-finance";
+      } else {
+        titleEl.textContent = t.confirmTutorTitle;
+        msgEl.textContent = t.confirmTutorMsg;
+        proceedBtn.className = "modal-btn btn-primary theme-tutor";
+      }
+
+      cancelBtn.textContent = t.btnCancel;
+      proceedBtn.textContent = t.btnProceed;
+
+      modal.classList.add("active");
+    }
+
+    function hideConfirmation() {
+      document.getElementById("confirm-modal").classList.remove("active");
+      pendingRedirectUrl = "";
+      pendingCardElement = null;
+    }
+
+    function triggerRedirect(card, targetUrl) {
+      const arrowSvg = card.querySelector(".card-arrow");
+      if (arrowSvg && !card.classList.contains("redirecting")) {
+        card.classList.add("redirecting");
+        
+        const spinner = document.createElement("div");
+        spinner.className = "spinner";
+        
+        let brandColor = "var(--brand-teal)";
+        if (card.classList.contains("card-finance")) brandColor = "var(--brand-orange)";
+        if (card.classList.contains("card-tutor")) brandColor = "var(--brand-purple)";
+        spinner.style.color = brandColor;
+
+        arrowSvg.style.display = "none";
+        card.appendChild(spinner);
+
+        setTimeout(() => {
+          window.open(targetUrl, "_blank");
+          spinner.remove();
+          arrowSvg.style.display = "block";
+          card.classList.remove("redirecting");
+        }, 600);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Show switcher
+      document.querySelector(".lang-switcher").style.display = "flex";
+
+      // Restore preference
+      let currentLang = "en";
+      try {
+        const savedLang = localStorage.getItem("sifututor_lang");
+        if (savedLang === "bm" || savedLang === "en") {
+          currentLang = savedLang;
+        }
+      } catch(e) {}
+      
+      setLanguage(currentLang);
+      
+      // Bind switcher buttons
+      document.getElementById("btn-bm").addEventListener("click", () => setLanguage("bm"));
+      document.getElementById("btn-en").addEventListener("click", () => setLanguage("en"));
+
+      // Bind modal actions
+      document.getElementById("modal-btn-cancel").addEventListener("click", hideConfirmation);
+      document.getElementById("modal-btn-proceed").addEventListener("click", () => {
+        if (pendingCardElement && pendingRedirectUrl) {
+          const card = pendingCardElement;
+          const url = pendingRedirectUrl;
+          hideConfirmation();
+          triggerRedirect(card, url);
+        }
+      });
+
+      // Close modal on overlay click
+      document.getElementById("confirm-modal").addEventListener("click", (e) => {
+        if (e.target.id === "confirm-modal") {
+          hideConfirmation();
+        }
+      });
+
+      const cards = document.querySelectorAll(".card");
+      
+      cards.forEach((card) => {
+        // Dynamic spotlight mouse/touch tracking positioning
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty("--x", `${x}px`);
+          card.style.setProperty("--y", `${y}px`);
+        });
+
+        // Click Ripple & Premium Loading Micro-interaction before redirect
+        card.addEventListener("click", function(e) {
+          e.preventDefault();
+          const targetUrl = this.href;
+
+          // 1. Create and render subtle Vercel-like ripple circle
+          const rect = this.getBoundingClientRect();
+          const ripple = document.createElement("span");
+          ripple.className = "ripple";
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.width = ripple.style.height = `${size}px`;
+          ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+          ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+          this.appendChild(ripple);
+
+          // Remove ripple element after animation finishes
+          setTimeout(() => ripple.remove(), 500);
+
+          // 2. Check modal trigger
+          if (this.classList.contains("card-finance")) {
+            showConfirmation("finance", targetUrl, this);
+          } else if (this.classList.contains("card-tutor")) {
+            showConfirmation("tutor", targetUrl, this);
+          } else {
+            triggerRedirect(this, targetUrl);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
